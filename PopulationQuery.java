@@ -11,7 +11,7 @@ public class PopulationQuery {
 	public static final int LONGITUDE_INDEX  = 6;
 	
 	// parse the input file into a large array held in a CensusData object
-	public static CensusData parse(String filename) {
+	public static CensusData parse(String filename, String x, String y, String version) {
 		CensusData result = new CensusData();
 		
         try {
@@ -57,6 +57,11 @@ public class PopulationQuery {
 	// argument 3: number of y-dimension buckets
 	// argument 4: -v1, -v2, -v3, -v4, or -v5
 	public static void main(String[] args) {
-		// FOR YOU
+		if (args.length == 4) {
+            parse(args[0],args[1],args[2],args[3]);
+        }else {
+        	System.err.println("Usage: filename of document to analyze");
+        	System.exit(1);
+        }
 	}
 }

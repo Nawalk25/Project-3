@@ -1,6 +1,5 @@
 
 
-
 public class CensusGroup {
 	public int   population;
 	public float realLatitude;
