@@ -11,7 +11,7 @@ public class PopulationQuery {
 	public static final int LONGITUDE_INDEX  = 6;
 	
 	// parse the input file into a large array held in a CensusData object
-	public static CensusData parse(String filename, String x, String y, String version) {
+	public static CensusData parse(String filename) {
 		CensusData result = new CensusData();
 		
         try {
