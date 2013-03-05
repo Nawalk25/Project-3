@@ -24,7 +24,6 @@ public class FindCorners extends RecursiveTask<Rectangle> {
 		return new Rectangle((west-1)*spacingX,(east-1)*spacingX,(north-1)*spacingY,(south-1)*spacingY);
 	}
 	
-	
 	protected Rectangle compute() {
 		if(hi-lo < 12) {
 			for(int i = lo ; i < hi; i++){

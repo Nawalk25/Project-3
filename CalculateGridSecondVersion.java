@@ -17,7 +17,8 @@ public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 		if(hi - lo <= 12){
 			int ans = 0;
 			for(int i = lo; i < hi ;i++){
-				if(data[i].longitude >= rt.left && data[i].latitude >= rt.bottom){
+				if(data[i].longitude >= rt.left && data[i].longitude <= rt.right &&
+					data[i].latitude <= rt.top && data[i].latitude >= rt.bottom){
 					ans+= data[i].population;
 				}
 			}
