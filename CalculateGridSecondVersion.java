@@ -8,7 +8,7 @@ public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 	private int hi;
 	private CensusGroup[] data;
 	private Rectangle rt;
-	
+
 	/**
 	 * Construct a new CalculateGridSecondVersion
 	 * @param lo lower bound
@@ -45,5 +45,5 @@ public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 			return rightAns + leftAns;
 		}
 	}
-	
+
 }

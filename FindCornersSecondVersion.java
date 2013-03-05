@@ -5,7 +5,7 @@ import java.util.concurrent.*;
  */
 @SuppressWarnings("serial")
 public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
-	
+
 	private CensusGroup[] usData;
 	private int hi; 
 	private int lo;
@@ -13,7 +13,7 @@ public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 	private float bottom; 
 	private float left; 
 	private float right;
-	
+
 	/**
 	 * Construct a new FindCornersSecondVersion
 	 * @param fileInput file that contains census-group-block data
@@ -44,12 +44,12 @@ public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 			left.fork();
 			Rectangle rightAns = right.compute();
 			Rectangle leftAns = left.join();
-			
+
 			float leftTemp = Math.min(rightAns.left, leftAns.left);
 			float rightTemp = Math.max(rightAns.right, leftAns.right);
 			float topTemp = Math.max(rightAns.top, leftAns.top);
 			float bottomTemp = Math.min(rightAns.bottom, leftAns.bottom);
-			
+
 			return new Rectangle(leftTemp, rightTemp, topTemp, bottomTemp);
 		}
 	}
