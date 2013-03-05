@@ -7,6 +7,7 @@ public class Version2 {
 	// west = smaller longitude (horizontal)
 	// south = smaller latitude (vertical)
 	Rectangle usRectangle;
+	
 	public Version2(CensusData fileInput){
 		usData = fileInput.data;
 		size = fileInput.data_size;
@@ -14,10 +15,13 @@ public class Version2 {
 	
 	final ForkJoinPool fjPool = new ForkJoinPool();
 	
-	public void findUSCorners() {
+	public Rectangle findUSCorners() {
 		Rectangle temp = fjPool.invoke(new FindCorners(usData, 0, size));
-		usRectangle = temp;
+		return temp;
 	}
 	
-
+	public int calculateGrid(Rectangle usRectangle, int west, int east, int north
+							,int bottom){
+		return 0;
+	}
 }
