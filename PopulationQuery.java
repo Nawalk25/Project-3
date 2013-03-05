@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class PopulationQuery {
 	// next four constants are relevant to parsing
@@ -58,10 +59,36 @@ public class PopulationQuery {
 	// argument 4: -v1, -v2, -v3, -v4, or -v5
 	public static void main(String[] args) {
 		if (args.length == 4) {
-            parse(args[0],args[1],args[2],args[3]);
+            CensusData data = parse(args[0]);
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Please give west, south, east, north coordinates of your query rectangle:");
+            String line = scan.nextLine();
+            String[] input = line.split(" ");
+            choices(args[3],data, Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(input[0])
+            		,Integer.parseInt(input[1]),Integer.parseInt(input[2]),Integer.parseInt(input[3]));
         }else {
         	System.err.println("Usage: filename of document to analyze");
         	System.exit(1);
         }
 	}
+	
+	public static void choices(String choice, CensusData data, int x, int y,int west, int south, int east, int north){
+		if(choice.equals("-v1")){
+        	
+        }else if(choice.equals("-v2")){
+        	Version2 ver = new Version2(data);
+        	Rectangle us = ver.findUSCorners();
+        	int population = ver.calculateGrid(us, x, y, 1, x, 1, y);
+        	int Qpopulation = ver.calculateGrid(us, x, y, west, east, south, north);
+        	System.out.println(population);
+        	System.out.println(Qpopulation);
+        }else if(choice.equals("-v3")){
+        	System.out.println("not yet implemented");
+        }else if(choice.equals("-v4")){
+        	System.out.println("not yet implemented");
+        }else {
+        	System.out.println("invalid version");
+        }
+	}
+
 }
