@@ -102,7 +102,6 @@ public class PopulationQuery {
             input = line.split(" ");
            
             if (input.length != 4) {
-            	System.err.println("needed 4 argument");
             	System.exit(1);
             }
             
