@@ -18,12 +18,6 @@ public class FindCorners extends RecursiveTask<Rectangle> {
 		left = usData[0].longitude; right = usData[0].longitude;
 	}
 	
-	public Rectangle specificRect(Rectangle big,int x, int y, int west, int east, int north, int south){
-		float spacingX = (big.right - big.left)/x;
-		float spacingY = (big.top - big.bottom)/y;
-		return new Rectangle((west-1)*spacingX,(east-1)*spacingX,(north-1)*spacingY,(south-1)*spacingY);
-	}
-	
 	protected Rectangle compute() {
 		if(hi-lo < 12) {
 			for(int i = lo ; i < hi; i++){
