@@ -1,5 +1,8 @@
 import java.util.concurrent.*;
-
+/**
+ * This class find the corners of the rectangle
+ * 
+ */
 @SuppressWarnings("serial")
 public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 	
@@ -11,13 +14,21 @@ public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 	private float left; 
 	private float right;
 	
+	/**
+	 * Construct a new FindCornersSecondVersion
+	 * @param fileInput file that contains census-group-block data
+	 * @param l lower bound
+	 * @param h upper bound
+	 */
 	public FindCornersSecondVersion(CensusGroup[] fileInput, int l, int h) {
 		usData = fileInput;
 		hi = h; lo = l;
 		top = usData[0].latitude; bottom = usData[0].latitude;
 		left = usData[0].longitude; right = usData[0].longitude;
 	}
-	
+	/**
+	 * Compute the corners of the rectangle
+	 */
 	protected Rectangle compute() {
 		if(hi-lo < 12) {
 			for(int i = lo ; i < hi; i++){

@@ -1,5 +1,7 @@
 import java.util.concurrent.*;
-
+/**
+ * This class calculate the rectangle population in the desired rectangle
+ */
 @SuppressWarnings("serial")
 public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 	private int lo;
@@ -7,12 +9,23 @@ public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 	private CensusGroup[] data;
 	private Rectangle rt;
 	
+	/**
+	 * Construct a new CalculateGridSecondVersion
+	 * @param lo lower bound
+	 * @param hi upper bound
+	 * @param data census-block-group
+	 * @param rt query rectangle
+	 */
 	public CalculateGridSecondVersion(int lo, int hi, CensusGroup[] data, Rectangle rt){
 		this.lo = lo;
 		this.hi = hi;
 		this.data = data;
 		this.rt = rt;
 	}
+	/**
+	 * Compute the population of the query rectangle
+	 * @return an integer that represent the population of the query rectangle
+	 */
 	protected Integer compute(){
 		if(hi - lo <= 5){
 			int ans = 0;
