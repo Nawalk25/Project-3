@@ -1,5 +1,7 @@
 import java.util.concurrent.*;
 /**
+ * CSE 332, Section AD, Project 3
+ * Lokita Metta Yaputra, Maria Angela Suhardi
  * This class calculate the rectangle population in the desired rectangle
  */
 @SuppressWarnings("serial")

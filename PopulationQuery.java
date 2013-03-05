@@ -64,14 +64,28 @@ public class PopulationQuery {
         	System.exit(1);
         }
 	}
-
+	/**
+	 * Check the if the user input for border query valid
+	 * @param x columns
+	 * @param y rows
+	 * @param west left of the query rectangle
+	 * @param south bottom of the query rectangle
+	 * @param east right of the query rectangle 
+	 * @param north upper of the query rectangle
+	 */
 	public static void checkInput(int x, int y, int west, int south, int east, int north){
 		if(west < 1 || west > x || south < 1 || south > y || east < west || east > x
 			|| north < south || north > y){
 			throw new IllegalArgumentException();
 		}
 	}
-	
+	/**
+	 * Process the data using the version that user input
+	 * @param data CensusData that requires
+	 * @param x columns
+	 * @param y rows
+	 * @param version that user input
+	 */
 	public static void processData(CensusData data, String x, String y, String version) {
 		int column = Integer.parseInt(x);
 		int row = Integer.parseInt(y);
@@ -96,9 +110,10 @@ public class PopulationQuery {
 		// Ask for query
 	    Scanner scan = new Scanner(System.in);
         String[] input = null;
-        while(true) {
+        String line = "";
+        while(!line.equals("exit")) {
         	System.out.println("Please give west, south, east, north coordinates of your query rectangle:");
-            String line = scan.nextLine();
+            line = scan.nextLine();
             input = line.split(" ");
            
             if (input.length != 4) {
@@ -116,7 +131,7 @@ public class PopulationQuery {
             float percentPopulation = ((float)totalPopulation/(float) processor.calculateGrid(rec,column,row,1,1, column,row))*100;
             System.out.println("percent of total population: " + (float)Math.round(percentPopulation * 100)/100);
         }
-        	
+        scan.close();	
 		
 	}
 }

@@ -1,7 +1,8 @@
 import java.util.concurrent.*;
 /**
+ * CSE 332, Section AD, Project 3
+ * Lokita Metta Yaputra, Maria Angela Suhardi
  * This class find the corners of the rectangle
- * 
  */
 @SuppressWarnings("serial")
 public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {

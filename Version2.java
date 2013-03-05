@@ -1,5 +1,7 @@
 import java.util.concurrent.*;
 /**
+ * CSE 332, Section AD, Project 3
+ * Lokita Metta Yaputra, Maria Angela Suhardi
  * This is the second version for counting census population in some rectangle
  * in the map. This version using parallelism
  *
