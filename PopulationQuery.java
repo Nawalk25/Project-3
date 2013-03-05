@@ -60,12 +60,18 @@ public class PopulationQuery {
 	public static void main(String[] args) {
 		if (args.length == 4) {
             CensusData data = parse(args[0]);
+            String line = "";
             Scanner scan = new Scanner(System.in);
-            System.out.println("Please give west, south, east, north coordinates of your query rectangle:");
-            String line = scan.nextLine();
-            String[] input = line.split(" ");
-            choices(args[3],data, Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(input[0])
-            		,Integer.parseInt(input[1]),Integer.parseInt(input[2]),Integer.parseInt(input[3]));
+            while(!line.equals("exit")){
+                System.out.println("Please give west, south, east, north coordinates of your query rectangle:");
+                line = scan.nextLine();
+	            String[] input = line.split(" ");
+	            if(input.length == 4){
+		            choices(args[3],data, Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(input[0])
+		            		,Integer.parseInt(input[1]),Integer.parseInt(input[2]),Integer.parseInt(input[3]));
+	            }
+            }
+            scan.close();
         }else {
         	System.err.println("Usage: filename of document to analyze");
         	System.exit(1);
@@ -80,8 +86,9 @@ public class PopulationQuery {
         	Rectangle us = ver.findUSCorners();
         	int population = ver.calculateGrid(us, x, y, 1, x, 1, y);
         	int Qpopulation = ver.calculateGrid(us, x, y, west, east, south, north);
-        	System.out.println(population);
-        	System.out.println(Qpopulation);
+        	System.out.println("population of rectangle: " + Qpopulation);
+        	double percentage = Qpopulation*100.0/population;
+        	System.out.println("percent of total population: " + String.format("%.2f",percentage));
         }else if(choice.equals("-v3")){
         	System.out.println("not yet implemented");
         }else if(choice.equals("-v4")){
@@ -89,6 +96,7 @@ public class PopulationQuery {
         }else {
         	System.out.println("invalid version");
         }
+		
 	}
 
 }

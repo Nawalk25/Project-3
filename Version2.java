@@ -4,9 +4,6 @@ public class Version2 {
 
 	CensusGroup[] usData;
 	int size;
-	// west = smaller longitude (horizontal)
-	// south = smaller latitude (vertical)
-	Rectangle usRectangle;
 	
 	public Version2(CensusData fileInput){
 		usData = fileInput.data;
@@ -25,9 +22,9 @@ public class Version2 {
 		float spacingX = (big.right - big.left)/x;
 		float spacingY = (big.top - big.bottom)/y;
 		float left = big.left + (west-1)*spacingX;
-		float right = left + (east-west-1)*spacingX;
+		float right = big.right - (x-east)*spacingX;
 		float bottom = big.bottom + (south-1)*spacingY;
-		float top = bottom + (north-south-1)*spacingY;
+		float top = big.top - (y-north)*spacingY;
 		Rectangle specific =  new Rectangle(left,right,top,bottom);
 		int population = fjPool.invoke(new CalculateGridSecondVersion(0,size,usData,specific));
 		return population;

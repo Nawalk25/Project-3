@@ -14,7 +14,7 @@ public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
 		this.rt = rt;
 	}
 	protected Integer compute(){
-		if(hi - lo <= 12){
+		if(hi - lo <= 5){
 			int ans = 0;
 			for(int i = lo; i < hi ;i++){
 				if(data[i].longitude >= rt.left && data[i].longitude <= rt.right &&
