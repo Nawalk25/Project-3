@@ -112,10 +112,10 @@ public class PopulationQuery {
             checkInput(column, row, w, s, e, n);
             
             int totalPopulation = processor.calculateGrid(rec,column,row,w,s,e,n);
-            System.out.println("Total population: " + totalPopulation);
+            System.out.println("population of rectangle: " + totalPopulation);
             
             float percentPopulation = ((float)totalPopulation/(float) processor.calculateGrid(rec,column,row,1,1, column,row))*100;
-            System.out.println("Percentage of U.S. population: " + (float)Math.round(percentPopulation * 100)/100 + "%");
+            System.out.println("percent of total population: " + (float)Math.round(percentPopulation * 100)/100);
         }
         	
 		
