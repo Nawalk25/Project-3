@@ -2,10 +2,10 @@ import java.util.concurrent.*;
 
 @SuppressWarnings("serial")
 public class CalculateGridSecondVersion extends RecursiveTask<Integer>{
-	int lo;
-	int hi;
-	CensusGroup[] data;
-	Rectangle rt;
+	private int lo;
+	private int hi;
+	private CensusGroup[] data;
+	private Rectangle rt;
 	
 	public CalculateGridSecondVersion(int lo, int hi, CensusGroup[] data, Rectangle rt){
 		this.lo = lo;

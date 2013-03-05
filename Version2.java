@@ -13,12 +13,11 @@ public class Version2 {
 	final ForkJoinPool fjPool = new ForkJoinPool();
 	
 	public Rectangle findUSCorners() {
-		Rectangle temp = fjPool.invoke(new FindCorners(usData, 0, size));
+		Rectangle temp = fjPool.invoke(new FindCornersSecondVersion(usData, 0, size));
 		return temp;
 	}
 	
-	public int calculateGrid(Rectangle big, int x, int y, int west, int east, int south
-							,int north){
+	public int calculateGrid(Rectangle big, int x, int y, int west, int east, int south,int north){
 		float spacingX = (big.right - big.left)/x;
 		float spacingY = (big.top - big.bottom)/y;
 		float left = big.left + (west-1)*spacingX;

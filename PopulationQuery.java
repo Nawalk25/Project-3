@@ -79,6 +79,7 @@ public class PopulationQuery {
 	}
 	
 	public static void choices(String choice, CensusData data, int x, int y,int west, int south, int east, int north){
+		checkInput(x,y,west,south,east,north);
 		if(choice.equals("-v1")){
         	
         }else if(choice.equals("-v2")){
@@ -98,5 +99,11 @@ public class PopulationQuery {
         }
 		
 	}
-
+	public static void checkInput(int x, int y, int west, int south, int east, int north){
+		if(west < 1 || west > x || south < 1 || south > y || east < west || east > x
+			|| north < south || north > y){
+			throw new IllegalArgumentException();
+		}
+	}
+	
 }
