@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.util.Scanner;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -51,6 +52,38 @@ public class PopulationQuery {
         }
         return result;
 	}
+	
+	public static void processData(CensusData data, String x, String y, String version) {
+		int column = Integer.parseInt(x);
+		int row = Integer.parseInt(y);
+		Processors processor = null;
+		if(version.equals("-v1")) {
+			processor = new Version1(data);
+		}else {
+			System.err.println("Error version not found");
+			System.exit(1);
+		}
+
+		processor.findUSCorners();
+		processor.divideRecToGrid(column, row);
+		
+		// Ask for query
+	    Scanner scan = new Scanner(System.in);
+        boolean start = true;
+        String[] input = null;
+        while(start || input.length == 4) {
+        	start = false;
+        	System.out.println("Please give west, south, east, north coordinates of your query rectangle:");
+            String line = scan.nextLine();
+            input = line.split(" ");
+            int w = Integer.parseInt(input[0]);	int s = Integer.parseInt(input[1]);
+            int e = Integer.parseInt(input[2]); int n = Integer.parseInt(input[3]);
+            System.out.println("Total population: " + processor.totalPopulation(w,s,e,n));
+            System.out.println("Percentage of U.S. population: " + (float)Math.round(processor.percentage(w,s,e,n) * 100)/100 + "%");
+        }
+        	
+		
+	}
 
 	// argument 1: file name for input data: pass this to parse
 	// argument 2: number of x-dimension buckets
@@ -58,7 +91,7 @@ public class PopulationQuery {
 	// argument 4: -v1, -v2, -v3, -v4, or -v5
 	public static void main(String[] args) {
 		if (args.length == 4) {
-            parse(args[0],args[1],args[2],args[3]);
+            processData(parse(args[0]),args[1],args[2],args[3]);
         }else {
         	System.err.println("Usage: filename of document to analyze");
         	System.exit(1);

@@ -1,6 +1,6 @@
 import java.util.concurrent.*;
 
-public class Version2 {
+public class Version2 implements Processors {
 
 	CensusGroup[] usData;
 	int size;
