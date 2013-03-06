@@ -49,8 +49,9 @@ public class Version1Test {
 				rec.toString(), temp.toString());
 	}
 	
-	@Test(timeout = TIMEOUT)
+	@Test
 	public void calculatePopulation(){
+		rec = processor.findUSCorners();
 		assertEquals("Checking population in a certain query rectangle", 
 				processor.calculateGrid(rec, 6,6,1,1,6,6), 1422);
 	}
