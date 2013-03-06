@@ -57,11 +57,8 @@ public class Version1 implements Processors {
 		// add the total population in which the long & latitude of the point is inside the rectangle
 		for(int i=0; i < size; i++) {
 			CensusGroup point = usData[i];
-			if(point.latitude >= minLatitude && point.latitude < maxLatitude &&
-				point.longitude >= minLongitude && point.longitude < maxLongitude) {
-					totalPopulation += point.population;
-			} else if((point.latitude == maxLatitude && maxLatitude == big.top) ||
-				(point.longitude == maxLongitude && maxLongitude == big.right)) {
+			if(point.latitude >= minLatitude && point.latitude <= maxLatitude &&
+				point.longitude >= minLongitude && point.longitude <= maxLongitude) {
 					totalPopulation += point.population;
 			}
 				
