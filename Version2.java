@@ -26,8 +26,7 @@ public class Version2 implements Processors {
 	 * @return rectangle that include the four corners
 	 */
 	public Rectangle findUSCorners() {
-		Rectangle temp = fjPool.invoke(new FindCornersSecondVersion(usData, 0, size));
-		return temp;
+		return fjPool.invoke(new FindCornersSecondVersion(usData, 0, size));
 	}
 
 	/**
@@ -50,7 +49,6 @@ public class Version2 implements Processors {
 		float top = big.top - (y-north)*spacingY;
 		Rectangle specific =  new Rectangle(left,right,top,bottom);
 		
-		int population = fjPool.invoke(new CalculateGridSecondVersion(0,size,usData,specific));
-		return population;
+		return fjPool.invoke(new CalculateGridSecondVersion(0,size,usData,specific));
 	}
 }
