@@ -49,11 +49,36 @@ public class Version1Test {
 				rec.toString(), temp.toString());
 	}
 	
-	@Test
-	public void calculatePopulation(){
+	
+	public void calculatePopulation(int x, int y, int west, int south, int east, int north, int unique){
 		rec = processor.findUSCorners();
 		assertEquals("Checking population in a certain query rectangle", 
-				processor.calculateGrid(rec, 6,6,1,1,6,6), 1422);
+				processor.calculateGrid(rec, x, y, west, south, east, north), unique);
+	}
+	
+	@Test(timeout = TIMEOUT)
+	public void calculateTheWholeRec(){
+		calculatePopulation(6,6,1,1,6,6,1422);
+	}
+	
+	@Test(timeout = TIMEOUT)
+	public void calculateOneGridOnCorner(){
+		calculatePopulation(6,6,1,1,1,1,97);
+	}
+	
+	@Test(timeout = TIMEOUT)
+	public void calculateARow(){
+		calculatePopulation(6,6,1,1,6,1,97);
+	}
+	
+	@Test(timeout = TIMEOUT)
+	public void calculateAColumn(){
+		calculatePopulation(6,6,1,1,1,6,97);
+	}
+	
+	@Test(timeout = TIMEOUT)
+	public void calculateAQueryRec(){
+		calculatePopulation(6,6,3,2,5,5,1221);
 	}
 	
 	
