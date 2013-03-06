@@ -50,18 +50,11 @@ public class Version1Test {
 	}
 	
 	@Test(timeout = TIMEOUT)
-	public void calculatePopulation(int x, int y, int west, int south, int east, int north,
-			int unique){
+	public void calculatePopulation(){
 		assertEquals("Checking population in a certain query rectangle", 
 				processor.calculateGrid(rec, 6,6,1,1,6,6), 1422);
 	}
 	
 	
 	
-	
-	
-
-	
-
-
 }
