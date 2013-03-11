@@ -95,10 +95,10 @@ public class PopulationQuery {
 		} else if(version.equals("-v2")) {
 			processor = new Version2(data);
 		} else if(version.equals("-v3")) {
-			processor = new Version3(data);
-		} else if(version.equals("-v4")) {
 			System.err.println("Version not implemented yet");
 			System.exit(1);
+		} else if(version.equals("-v4")) {
+			processor = new Version4(data);
 		} else {
 			System.err.println("Error version not found");
 			System.exit(1);
@@ -123,7 +123,7 @@ public class PopulationQuery {
             int e = Integer.parseInt(input[2]); int n = Integer.parseInt(input[3]);
             
             checkInput(column, row, w, s, e, n);
-            
+
             int totalPopulation = processor.calculateGrid(rec,column,row,w,s,e,n);
             System.out.println("population of rectangle: " + totalPopulation);
             

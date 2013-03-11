@@ -6,7 +6,7 @@ import java.util.concurrent.*;
  * in the map. This version using parallelism
  *
  */
-public class Version2 implements Processors {
+public class Version2 extends Processors {
 
 	private CensusGroup[] usData;
 	private int size;
@@ -25,6 +25,7 @@ public class Version2 implements Processors {
 	 * Find the four corners and make a rectangle
 	 * @return rectangle that include the four corners
 	 */
+	@Override
 	public Rectangle findUSCorners() {
 		return fjPool.invoke(new FindCornersSecondVersion(usData, 0, size));
 	}
@@ -40,6 +41,7 @@ public class Version2 implements Processors {
 	 * @param north upper border of the query rectangle
 	 * @return population in the query rectangle
 	 */
+	@Override
 	public int calculateGrid(Rectangle big, int x, int y, int west, int south, int east,int north){
 		float spacingX = (big.right - big.left)/x;
 		float spacingY = (big.top - big.bottom)/y;

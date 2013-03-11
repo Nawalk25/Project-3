@@ -1,7 +1,14 @@
-public interface Processors {
+class Processors {
 
+	public int calculateGrid(Rectangle rec, int column, int row, int w, int s,
+			int e, int n) {
+				return 0;
+		// TODO Auto-generated method stub
+	}
 
-    public Rectangle findUSCorners();
-    public int calculateGrid(Rectangle big, int x, int y, int west, int south, int east, int north);
+	public Rectangle findUSCorners() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

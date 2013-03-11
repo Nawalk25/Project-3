@@ -7,7 +7,9 @@
  * 
  */
 
-public class Version1 extends Processors {
+import java.util.concurrent.*;
+
+public class Version4 extends Processors {
 	
 	// file being read is parsed then saved in usData 
 	public CensusGroup[] usData;
@@ -15,7 +17,7 @@ public class Version1 extends Processors {
 	// the size of the file
 	public int size;
 	
-	public Version1(CensusData fileInput){
+	public Version4(CensusData fileInput){
 		usData = fileInput.data;
 		size = fileInput.data_size;
 	}
@@ -43,30 +45,30 @@ public class Version1 extends Processors {
 	 * @param west-most column, south-most row, east-most column, north-most row of the area being asked
 	 * @return total population in the query rectangle
 	 */
+	
+	
+	static final ForkJoinPool fjPool = new ForkJoinPool();
+	
 	@Override
-	public int calculateGrid(Rectangle big, int x, int y, int west, int south, int east, int north) {
-		float xInterval = (big.right - big.left)/x;
-		float yInterval = (big.top - big.bottom)/y;
+	public int calculateGrid(Rectangle rec, int column, int row, int w, int s, int e, int n) {
+		final ForkJoinPool fjPool = new ForkJoinPool(); 
+		int[][] ans = new int[row][column];
+		fjPool.invoke(new makeGrid(0, size, column, row, rec, usData, ans));
 		
-		int totalPopulation = 0;
-		
-		// find the max min latitude longitude of the query rectangle
-		float minLatitude = big.bottom + (south-1)* yInterval;
-		float maxLatitude = big.bottom + north* yInterval;
-		float minLongitude = big.left + (west-1)* xInterval;
-		float maxLongitude = big.left + east* xInterval;
-		
-		// add the total population in which the long & latitude of the point is inside the rectangle
-		for(int i=0; i < size; i++) {
-			CensusGroup point = usData[i];
-			if(point.latitude >= minLatitude && point.latitude <= maxLatitude &&
-				point.longitude >= minLongitude && point.longitude <= maxLongitude) {
-					totalPopulation += point.population;
+		int counter = w-1;
+		int totalPop = 0;
+		while(counter < e) {
+			for(int i=s; i <= n; i++) {
+				totalPop += ans[row - i][counter];
 			}
-				
+			counter++;
 		}
-		return totalPopulation;
+		return totalPop;
 	}
+
+
+	
+
 	
 	
 }
