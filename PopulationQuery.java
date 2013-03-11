@@ -95,8 +95,7 @@ public class PopulationQuery {
 		} else if(version.equals("-v2")) {
 			processor = new Version2(data);
 		} else if(version.equals("-v3")) {
-			System.err.println("Version not implemented yet");
-			System.exit(1);
+			processor = new Version3(data);
 		} else if(version.equals("-v4")) {
 			System.err.println("Version not implemented yet");
 			System.exit(1);
