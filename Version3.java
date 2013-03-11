@@ -20,7 +20,25 @@ public class Version3 implements Processors{
 			int i = (int) Math.round((data[m].longitude-big.left)/spacingX);
 			grid[i][j] += data[m].population;
 		}
-		return 0;
+		for(int i = 0 ; i < grid.length ; i++){
+			for(int j = 0 ; j < grid[i].length ; j++){
+				int up = 0;
+				int left = 0;
+				int diag = 0;
+				if(j + 1 <= grid[i].length-1){
+					up = grid[i][j+1];
+				}
+				if(i - 1 >= 0){
+					left = grid[i-1][j];
+				}
+				if((j + 1 <= grid[i].length -1) && (i - 1 >= 0)){
+					diag = grid[i-1][j+1];
+				}
+				grid[i][j] += up + left - diag;
+			}
+		}
+		return grid[east-1][south-1]- grid[east-1][north-1] - grid[west-1][south-1] +
+				grid[west-1][north-1];
 	}
 
 
