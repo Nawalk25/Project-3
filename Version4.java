@@ -29,15 +29,8 @@ public class Version4 extends Processors {
 	 */
 	@Override
 	public Rectangle findUSCorners(){
-		Rectangle usRectangle = new Rectangle(usData[0].longitude, usData[0].longitude, usData[0].latitude,
-				usData[0].latitude);
-		for(int i = 1 ; i < size; i++){
-			usRectangle.top = Math.max(usData[i].latitude, usRectangle.top);
-			usRectangle.bottom = Math.min(usData[i].latitude, usRectangle.bottom);
-			usRectangle.right = Math.max(usData[i].longitude, usRectangle.right);
-			usRectangle.left = Math.min(usData[i].longitude, usRectangle.left);
-		}
-		return usRectangle;
+		Version1 ver = new Version1(census);
+		return ver.findUSCorners();
 	}
 	
 	/**
@@ -48,16 +41,14 @@ public class Version4 extends Processors {
 	 */
 	
 	
-	static final ForkJoinPool fjPool = new ForkJoinPool();
-	
 	@Override
-	public int calculateGrid(Rectangle rec, int column, int row, int w, int s, int e, int n) {
+	public int calculateGrid(Rectangle rec, int x, int y, int west, int south, int east, int north) {
 		final ForkJoinPool fjPool = new ForkJoinPool(); 
-		int[][] ans = new int[column][row];
-		fjPool.invoke(new makeGrid(0, size, column, row, rec, usData, ans));
+		Result param = new Result(usData, x, y, findUSCorners());
+		int[][] ans = fjPool.invoke(new makeGrid(0, size, param));
 		
 		Version3 ver = new Version3(census);
-		return ver.queryRect(ans, column, row, w, s, e, n);
+		return ver.queryRect(ans, x, y, west, south, east, north);
 	}
 
 
