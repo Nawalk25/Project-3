@@ -19,20 +19,24 @@ public class makeGrid extends RecursiveAction {
 	
 	@Override
 	protected void compute() {
-		if(hi-lo < input.length) {
-			for(int i=lo; i < hi; i++) {
-				CensusGroup point = input[i];
-				int y = (int) ((point.latitude - wholeRec.bottom) / yInt);
-				int x = (int) ((point.longitude - wholeRec.left) / xInt);
-				if(x == column)
-					x--;
-				if(y == row)
-					y--;
-				rec[row - y - 1][x] += point.population;
-	
+		if(hi-lo < 12) {
+			for(int m = lo ; m < hi; m++){
+				int j = 0;
+				int i = 0;
+				if(input[m].latitude == wholeRec.top){
+					j = row-1;
+				}else{
+					j = (int) Math.floor((input[m].latitude-wholeRec.bottom)/yInt);
+				}
+				if(input[m].longitude == wholeRec.right){
+					i = column-1;;
+				}else{
+					i = (int) Math.floor((input[m].longitude-wholeRec.left)/xInt);
+				}
+				rec[i][j] += input[m].population;
 			}
  		} else {
- 			makeGrid left = new makeGrid(lo, (hi+lo)/2, column, row, wholeRec, input, rec);
+ 			makeGrid left = new makeGrid(lo,(hi+lo)/2, column, row, wholeRec, input, rec);
  			makeGrid right = new makeGrid((hi+lo)/2, hi, column, row, wholeRec, input, rec);
  			left.fork();
  			right.compute();

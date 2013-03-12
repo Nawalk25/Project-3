@@ -24,7 +24,6 @@ public class Version1 extends Processors {
 	 * Make the Rectangle grid of all USA (find 4 corners of the USA rectangle)
 	 * @return Rectangle of all USA
 	 */
-	@Override
 	public Rectangle findUSCorners(){
 		Rectangle usRectangle = new Rectangle(usData[0].longitude, usData[0].longitude, usData[0].latitude,
 				usData[0].latitude);
@@ -43,7 +42,6 @@ public class Version1 extends Processors {
 	 * @param west-most column, south-most row, east-most column, north-most row of the area being asked
 	 * @return total population in the query rectangle
 	 */
-	@Override
 	public int calculateGrid(Rectangle big, int x, int y, int west, int south, int east, int north) {
 		float xInterval = (big.right - big.left)/x;
 		float yInterval = (big.top - big.bottom)/y;

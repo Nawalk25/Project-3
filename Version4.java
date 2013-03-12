@@ -13,11 +13,12 @@ public class Version4 extends Processors {
 	
 	// file being read is parsed then saved in usData 
 	public CensusGroup[] usData;
-	
+	public CensusData census;
 	// the size of the file
 	public int size;
 	
 	public Version4(CensusData fileInput){
+		census = fileInput;
 		usData = fileInput.data;
 		size = fileInput.data_size;
 	}
@@ -52,18 +53,11 @@ public class Version4 extends Processors {
 	@Override
 	public int calculateGrid(Rectangle rec, int column, int row, int w, int s, int e, int n) {
 		final ForkJoinPool fjPool = new ForkJoinPool(); 
-		int[][] ans = new int[row][column];
+		int[][] ans = new int[column][row];
 		fjPool.invoke(new makeGrid(0, size, column, row, rec, usData, ans));
 		
-		int counter = w-1;
-		int totalPop = 0;
-		while(counter < e) {
-			for(int i=s; i <= n; i++) {
-				totalPop += ans[row - i][counter];
-			}
-			counter++;
-		}
-		return totalPop;
+		Version3 ver = new Version3(census);
+		return ver.queryRect(ans, column, row, w, s, e, n);
 	}
 
 
