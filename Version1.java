@@ -7,7 +7,7 @@
  * 
  */
 
-public class Version1 extends Processors {
+public class Version1 implements Processors {
 	
 	// file being read is parsed then saved in usData 
 	public CensusGroup[] usData;

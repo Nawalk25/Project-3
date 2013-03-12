@@ -9,7 +9,7 @@
 
 import java.util.concurrent.*;
 
-public class Version4 extends Processors {
+public class Version4 implements Processors {
 	
 	// file being read is parsed then saved in usData 
 	public CensusGroup[] usData;

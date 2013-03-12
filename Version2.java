@@ -6,7 +6,7 @@ import java.util.concurrent.*;
  * in the map. This version using parallelism
  *
  */
-public class Version2 extends Processors {
+public class Version2 implements Processors {
 
 	private CensusGroup[] usData;
 	private int size;

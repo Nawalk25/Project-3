@@ -1,5 +1,5 @@
 
-public class Version3 extends Processors{
+public class Version3 implements Processors{
 	public CensusData input;
 	public int size;
 	
