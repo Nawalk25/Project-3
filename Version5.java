@@ -7,13 +7,36 @@ public class Version5 implements Processors{
 	}
 	
 	@Override
-	public int calculateGrid(Rectangle rec, int column, int row, int w, int s,
+	public int calculateGrid(Rectangle rect, int x, int y, int w, int s,
 			int e, int n) {
-		int[][] grid = new int[column][row];
-		MakeGridFifthVersion makeGrid = new MakeGridFifthVersion(column, row, 0, data.data_size, data.data, rec, grid);
-		makeGrid.run();
+		int[][] grid = new int[x][y];
+		int lo = 0;
+		int hi = data.data_size;
+		MakeGridFifthVersion first = new MakeGridFifthVersion(x,y,lo,(hi+lo)/4,data.data,rect,grid);
+		MakeGridFifthVersion second = new MakeGridFifthVersion(x,y,(hi+lo)/4,(hi+lo)/2,data.data,rect,grid);
+		MakeGridFifthVersion third = new MakeGridFifthVersion(x,y,(hi+lo)/2,(hi+lo)*3/4,data.data,rect,grid);
+		MakeGridFifthVersion fourth = new MakeGridFifthVersion(x,y,(hi+lo)*3/4,hi,data.data,rect,grid);
+		first.start();
+		second.start();
+		third.start();
+		fourth.run();
+		try {
+			first.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			second.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			third.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		Version3 ver = new Version3(data);
-		return ver.queryRect(makeGrid.grid, column, row, w, s, e, n);
+		return ver.queryRect(first.grid, x, y, w, s, e, n);
 	}
 
 	@Override
