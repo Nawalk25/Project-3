@@ -98,8 +98,11 @@ public class PopulationQuery {
 			processor = new Version3(data);
 		} else if(version.equals("-v4")) {
 			processor = new Version4(data);
-		} else {
+		} else if(version.equals("-v5")) {
 			processor = new Version5(data);
+		} else {
+			System.err.println("Error version not found");
+			System.exit(1);
 		}
     	
 		Rectangle rec = processor.findUSCorners();

@@ -1,11 +1,19 @@
+/**
+ * CSE 332, Section AD, Project 3
+ * Lokita Metta Yaputra, Maria Angela Suhardi
+ * 
+ * This is makeGrid class that help version 4 parallelize making grid
+ * of the big rectangle
+ * 
+ */
+
 import java.util.concurrent.*;
 
 @SuppressWarnings("serial")
 public class makeGrid extends RecursiveTask<int[][]> {
 	
 	int lo; int hi; Result info;
-	// range of 'l' until 'h' of array 'a' wanted to mapped into bit vector
-	// bitsArray is the array of bit vector of the input array
+
 	makeGrid(int l, int h, Result data) {
 		lo = l;
 		hi = h;
@@ -13,8 +21,10 @@ public class makeGrid extends RecursiveTask<int[][]> {
 	}
 	
 	@Override
+	// making the overall grid with each grid contain population on that certain range of 
+	// longitude & latitude with parallel method
 	protected int[][] compute() {
-		if(hi-lo < 12) {
+		if(hi-lo < 100) {
 			int[][] grid = new int[info.x][info.y];
 			CensusGroup[] data = info.data;
 			float spacingX = (info.corners.right - info.corners.left)/(info.x);
@@ -42,6 +52,7 @@ public class makeGrid extends RecursiveTask<int[][]> {
  			int[][] rightAns = right.compute();
  			int[][] leftAns = left.join();
  			
+ 			// added the population of the left grid and the right grid
  			int[][] combineAns = new int[info.x][info.y];
  			for(int row=0; row < info.y; row++) {
  				for(int column=0; column < info.x; column++) {
