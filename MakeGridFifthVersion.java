@@ -11,9 +11,9 @@ public class MakeGridFifthVersion extends java.lang.Thread{
 	private int y;
 	private Rectangle rect;
 	
-	public MakeGridFifthVersion(int x, int y, int lo, int hi, CensusGroup[] data, Rectangle rect, int[][] grid){
+	public MakeGridFifthVersion(int x, int y, int lo, int hi, CensusGroup[] data, Rectangle rect, int[][] grid, ReentrantLock[][] lock){
 		this.x = x; this.y = y; this.lo = lo; this.hi = hi; this.data = data; this.rect = rect;
-		this.grid = grid; lk = new ReentrantLock[x][y];
+		this.grid = grid; lk = lock;
 		for(int i = 0; i < x; i++){
 			for(int j = 0; j < y; j++){
 				lk[i][j] = new ReentrantLock();
