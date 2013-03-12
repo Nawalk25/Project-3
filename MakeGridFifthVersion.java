@@ -42,21 +42,9 @@ public class MakeGridFifthVersion extends java.lang.Thread{
 	public void run(){
 		Rectangle rect = info.corners;
 		CensusGroup[] data = info.data;
-		float spacingX = (rect.right - rect.left)/(info.x);
-		float spacingY = (rect.top - rect.bottom)/(info.y);
 		for(int m = lo ; m < hi; m++){
-			int j = 0;
-			int i = 0;
-			if(data[m].latitude == rect.top){
-				j = info.y-1;
-			}else{
-				j = (int) Math.floor((data[m].latitude-rect.bottom)/spacingY);
-			}
-			if(data[m].longitude == rect.right){
-				i = info.x-1;;
-			}else{
-				i = (int) Math.floor((data[m].longitude-rect.left)/spacingX);
-			}
+			int j = GetIndex.getIndexY(rect, info.y, data[m].latitude);
+			int i = GetIndex.getIndexX(rect, info.x, data[m].longitude);
 			update(i,j,data[m].population);
 		}
 	}

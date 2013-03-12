@@ -27,21 +27,9 @@ public class makeGrid extends RecursiveTask<int[][]> {
 		if(hi-lo < 100) {
 			int[][] grid = new int[info.x][info.y];
 			CensusGroup[] data = info.data;
-			float spacingX = (info.corners.right - info.corners.left)/(info.x);
-			float spacingY = (info.corners.top - info.corners.bottom)/(info.y);
 			for(int m = lo ; m < hi; m++){
-				int j = 0;
-				int i = 0;
-				if(data[m].latitude == info.corners.top){
-					j = info.y-1;
-				}else{
-					j = (int) Math.floor((data[m].latitude-info.corners.bottom)/spacingY);
-				}
-				if(data[m].longitude == info.corners.right){
-					i = info.x-1;
-				}else{
-					i = (int) Math.floor((data[m].longitude-info.corners.left)/spacingX);
-				}
+				int j = GetIndex.getIndexY(info.corners, info.y, data[m].latitude);
+				int i = GetIndex.getIndexX(info.corners, info.x, data[m].longitude);
 				grid[i][j] += data[m].population;
 			}
 			return grid;

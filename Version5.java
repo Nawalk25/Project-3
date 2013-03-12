@@ -10,7 +10,7 @@
 import java.util.concurrent.locks.ReentrantLock;
 
 
-public class Version5 extends Processors{
+public class Version5 implements Processors{
 	private CensusData data;
 	public int size;
 	
@@ -20,7 +20,7 @@ public class Version5 extends Processors{
 	}
 	
 	/**
-	 * use 4 thread to make grid with population in each grid
+	 * Use 4 thread to make grid with population in each grid
 	 * using shared grid & shared lock to keep the grid changed at the same time
 	 * @return total Population inside the rectangle made by x,y,w,s 
 	 */
