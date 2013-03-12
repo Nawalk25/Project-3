@@ -1,10 +1,12 @@
+import java.util.concurrent.locks.ReentrantLock;
+
 
 public class MakeGridFifthVersion extends java.lang.Thread{
 	private int lo;
 	private int hi;
 	private CensusGroup[] data;
 	public int[][] grid;
-	private Object[][] lk;
+	private ReentrantLock[][] lk;
 	private int x;
 	private int y;
 	private Rectangle rect;
@@ -13,7 +15,7 @@ public class MakeGridFifthVersion extends java.lang.Thread{
 		this.lo = lo;
 		this.hi = hi;
 		this.data = data;
-		lk = new Object[x][y];
+		lk = new ReentrantLock[x][y];
 		this.rect = rect;
 		this.grid = grid;
 	}
@@ -30,7 +32,7 @@ public class MakeGridFifthVersion extends java.lang.Thread{
 	}
 	
 	public void run(){
-		if(hi - lo < 10){
+		if(hi - lo < 1000){
 			float spacingX = (rect.right - rect.left)/(x);
 			float spacingY = (rect.top - rect.bottom)/(y);
 			for(int m = lo ; m < hi; m++){
