@@ -1,5 +1,5 @@
 
-public class Version3 implements Processors{
+public class Version3 extends Processors{
 	public CensusData input;
 	public int size;
 	
@@ -7,7 +7,7 @@ public class Version3 implements Processors{
 		this.input = input;
 		size = input.data_size;
 	}
-
+	
 
 	@Override
 	public int calculateGrid(Rectangle big, int x, int y, int west, int south, int east, int north) {
@@ -30,6 +30,21 @@ public class Version3 implements Processors{
 			}
 			grid[i][j] += data[m].population;
 		}
+		return queryRect(grid,x, y, west,south,east,north);
+	}
+	
+	/**
+	 * Calculate the population of the query rectangle
+	 * @param grid the array of population
+	 * @param x 
+	 * @param y
+	 * @param west the left border of the query rectangle
+	 * @param south the bottom border of the query rectangle
+	 * @param east the right border of the query rectangle
+	 * @param north the top border of the query rectangle
+	 * @return the population of the query rectangle
+	 */
+	public int queryRect(int[][] grid,int x, int y, int west, int south, int east, int north){
 		for(int i = 0 ; i < grid.length ; i++){
 			for(int j = grid[i].length-1 ; j >= 0 ; j--){
 				int up = 0;
@@ -59,9 +74,8 @@ public class Version3 implements Processors{
 		if((west-2>=0)&&(north < y)){
 			topLeft = grid[west-2][north];
 		}
-		return grid[east-1][south-1]- topLeft - bottomLeft + topRight;
+		return grid[east-1][south-1]- topRight - bottomLeft + topLeft;
 	}
-
 
 	@Override
 	public Rectangle findUSCorners() {
