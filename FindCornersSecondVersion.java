@@ -14,24 +14,25 @@ public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 	private float bottom; 
 	private float left; 
 	private float right;
-
+	private int cutoff;
 	/**
 	 * Construct a new FindCornersSecondVersion
 	 * @param fileInput file that contains census-group-block data
 	 * @param l lower bound
 	 * @param h upper bound
 	 */
-	public FindCornersSecondVersion(CensusGroup[] fileInput, int l, int h) {
+	public FindCornersSecondVersion(CensusGroup[] fileInput, int l, int h,int cutoff) {
 		usData = fileInput;
 		hi = h; lo = l;
 		top = usData[0].latitude; bottom = usData[0].latitude;
 		left = usData[0].longitude; right = usData[0].longitude;
+		this.cutoff = cutoff;
 	}
 	/**
 	 * Compute the corners of the rectangle
 	 */
 	protected Rectangle compute() {
-		if(hi-lo < 12) {
+		if(hi-lo <= cutoff) {
 			for(int i = lo ; i < hi; i++){
 				top = Math.max(usData[i].latitude, top);
 				bottom = Math.min(usData[i].latitude, bottom);
@@ -40,8 +41,8 @@ public class FindCornersSecondVersion extends RecursiveTask<Rectangle> {
 			}
 			return new Rectangle(left, right, top, bottom);
 		} else {
-			FindCornersSecondVersion left = new FindCornersSecondVersion(usData, lo, (hi+lo)/2);
-			FindCornersSecondVersion right = new FindCornersSecondVersion(usData, (hi+lo)/2, hi);
+			FindCornersSecondVersion left = new FindCornersSecondVersion(usData, lo, (hi+lo)/2,cutoff);
+			FindCornersSecondVersion right = new FindCornersSecondVersion(usData, (hi+lo)/2, hi,cutoff);
 			left.fork();
 			Rectangle rightAns = right.compute();
 			Rectangle leftAns = left.join();

@@ -11,14 +11,16 @@ public class Version2 implements Processors {
 	private CensusGroup[] usData;
 	private int size;
 	private final ForkJoinPool fjPool = new ForkJoinPool();
+	private int cutoff;
 
 	/**
 	 * Construct a new Version2
 	 * @param fileInput file that contains the census data
 	 */
-	public Version2(CensusData fileInput){
+	public Version2(CensusData fileInput, int cutoff){
 		usData = fileInput.data;
 		size = fileInput.data_size;
+		this.cutoff = cutoff;
 	}
 
 	/**
@@ -27,7 +29,7 @@ public class Version2 implements Processors {
 	 */
 	@Override
 	public Rectangle findUSCorners() {
-		return fjPool.invoke(new FindCornersSecondVersion(usData, 0, size));
+		return fjPool.invoke(new FindCornersSecondVersion(usData, 0, size,cutoff));
 	}
 
 	/**

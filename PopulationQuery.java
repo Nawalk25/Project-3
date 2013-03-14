@@ -87,25 +87,28 @@ public class PopulationQuery {
 	 * @param version that user input
 	 */
 	public static void processData(CensusData data, String x, String y, String version) {
+		
 		int column = Integer.parseInt(x);
 		int row = Integer.parseInt(y);
 		Processors processor = null;
 		if(version.equals("-v1")) {
 			processor = new Version1(data);
 		} else if(version.equals("-v2")) {
-			processor = new Version2(data);
+			processor = new Version2(data,100);
 		} else if(version.equals("-v3")) {
 			processor = new Version3(data);
 		} else if(version.equals("-v4")) {
-			processor = new Version4(data);
+			processor = new Version4(data,100);
 		} else if(version.equals("-v5")) {
-			processor = new Version5(data);
+			processor = new Version5(data,100);
 		} else {
 			System.err.println("Error version not found");
 			System.exit(1);
 		}
-    	
+		
 		Rectangle rec = processor.findUSCorners();
+
+
 		
 		// Ask for query
 	    Scanner scan = new Scanner(System.in);
@@ -129,7 +132,9 @@ public class PopulationQuery {
             System.out.println("population of rectangle: " + totalPopulation);
             
             float percentPopulation = ((float)totalPopulation/(float) processor.calculateGrid(rec,column,row,1,1, column,row))*100;
+            
             System.out.println("percent of total population: " + String.format("%.2f",percentPopulation));
+            
         }
         scan.close();	
 		

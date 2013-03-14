@@ -13,10 +13,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Version5 implements Processors{
 	private CensusData data;
 	public int size;
+	private int cutoff;
 	
-	public Version5(CensusData data){
+	public Version5(CensusData data,int cutoff){
 		this.data = data;
 		size = data.data_size;
+		this.cutoff = cutoff;
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public class Version5 implements Processors{
 	 */
 	@Override
 	public Rectangle findUSCorners() {
-		Version2 ver = new Version2(data);
+		Version2 ver = new Version2(data,cutoff);
 		return ver.findUSCorners();
 	}
 

@@ -16,11 +16,13 @@ public class Version4 implements Processors {
 	public CensusData census;
 	// the size of the file
 	public int size;
+	public int cutoff;
 	
-	public Version4(CensusData fileInput){
+	public Version4(CensusData fileInput,int cutoff){
 		census = fileInput;
 		usData = fileInput.data;
 		size = fileInput.data_size;
+		this.cutoff = cutoff;
 	}
 	
 	/**
@@ -29,7 +31,7 @@ public class Version4 implements Processors {
 	 */
 	@Override
 	public Rectangle findUSCorners(){
-		Version2 ver = new Version2(census);
+		Version2 ver = new Version2(census,cutoff);
 		return ver.findUSCorners();
 	}
 	
@@ -44,7 +46,6 @@ public class Version4 implements Processors {
 		final ForkJoinPool fjPool = new ForkJoinPool(); 
 		Result param = new Result(usData, x, y, rec);
 		int[][] ans = fjPool.invoke(new makeGrid(0, size, param));
-		
 		Version3 ver = new Version3(census);
 		return ver.queryRect(ans, x, y, west, south, east, north);
 	}

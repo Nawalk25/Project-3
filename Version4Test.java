@@ -22,7 +22,7 @@ public class Version4Test {
 		data.add(97, 5, -35); 
 		data.add(468, 26, -19); 
 		data.add(33, 35, -18); 
-		processor = new Version4(data);
+		processor = new Version4(data,100);
 	}
 	
 	private float mercatorConversion(float lat){
